@@ -1,0 +1,17 @@
+
+
+Qual é o melhor benchmark para representar a wealth?
+
+
+#Qual é o retorno médio do IMAB em 10 Anos?
+#Como é o retorno em janelas rolantes de 10y?
+
+#Qual é a vol anualizada media do IMAB nos ultimos 10y?
+#Qual é a vol anualizada no ultimo ano?
+#Como é o comportamento do rolling vol window 3M?
+# Sharpe Ratio rolling Window
+
+#Como se comporta o IMAB diante de mudanças nas taxas DI e IPCA?
+#Qual é o retorno do IMAB em % do DI em janelas rolantes de 12M?
+#Histograma de Retorno em Janelas rolantes de 12M
+#plot return x vol: Loss Ratio
