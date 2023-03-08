@@ -11,7 +11,7 @@ def grafico_janelas_rolantes(df,coluna1,coluna2,ativo,frequencia):
     df.plot(kind="line",x=coluna1,y=coluna2,ax=ax)
     ax.set(title=texto,xlabel="Periodo",ylabel="Retorno (%)")
     #Adiciona uma reta da Media
-    ax.axhline(y=df[coluna2].mean(),color="black",linestyle="--")
+    #ax.axhline(y=df[coluna2].mean(),color="black",linestyle="--")
     
     return fig
   
