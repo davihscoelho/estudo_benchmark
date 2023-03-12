@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 
 from src.data.get_data import get_data
+#from get_data import get_data
 
 def get_anual_returns_indices_imab():
   
@@ -18,7 +19,7 @@ def get_anual_returns_indices_imab():
   
 def get_anual_returns_indices_ihfa():
   
-  path = "data/raw/ANBIMA/IMAB-HISTORICO.xls"
+  path = "data/raw/ANBIMA/IHFA-HISTORICO.xls"
   load_path = r"data/processed/"
   nome_arquivo = "11_anual_returns_ihfa.csv"
   df = get_data(path)
@@ -81,11 +82,24 @@ def get_anual_returns_cdi():
   df["Variação_12_Meses_(%)"] = df["Variação_12_Meses_(%)"].round(4)
   
   df.to_csv(load_path+nome_arquivo,index=False)
+  #print(df.head()),
+
+def get_anual_returns_indices():
+  
+  path = "data/processed/04_daily_returns_indices.csv"
+  load_path = r"data/processed/"
+  nome_arquivo = "15_anual_returns_indices.csv"
+  df = pd.read_csv(path)
+  
   #print(df.head())
+  df.iloc[:,0:7]= df.iloc[:,0:7].rolling(window=252).sum().round(4)
+  #print(df.head())
+  df.to_csv(load_path+nome_arquivo,index=False)
 
 ##### EXECUTION #####
-get_anual_returns_indices_imab()
-get_anual_returns_indices_ihfa()
-get_anual_returns_indices_imab5()
-get_anual_returns_portfolios()
-get_anual_returns_cdi()
+# get_anual_returns_indices_imab()
+# get_anual_returns_indices_ihfa()
+# get_anual_returns_indices_imab5()
+# get_anual_returns_portfolios()
+# get_anual_returns_cdi()
+#get_anual_returns_indices()

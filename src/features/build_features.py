@@ -112,7 +112,31 @@ def merge_vol_3M_portfolios():
     
     load_path = r"data/final/"
     nome_arquivo = "02_vol_portfolios_rw_3M.csv"
-    final_df.to_csv(load_path+nome_arquivo,index=False) 
+    final_df.to_csv(load_path+nome_arquivo,index=False)
+  
+def calculate_vol_3M_indices():
+    
+    #Get the Data
+    df = pd.read_csv("data/processed/04_daily_returns_indices.csv")
+    
+    df_vol = (((df.iloc[:,0:7]*100).rolling(window=66).std())*np.sqrt(252))
+    df_vol = df_vol.round(4)
+    df_vol["data"] = df["data"]
+    load_path = r"data/final/"
+    nome_arquivo = "04_vol_indices_rw_3M.csv"
+    df_vol.to_csv(load_path+nome_arquivo,index=False)
+  
+def calculate_vol_12_indices():
+    
+    #Get the Data
+    df = pd.read_csv("data/processed/04_daily_returns_indices.csv")
+    
+    df_vol = (((df.iloc[:,0:7]*100).rolling(window=252).std())*np.sqrt(252))
+    df_vol = df_vol.round(4)
+    df_vol["data"] = df["data"]
+    load_path = r"data/final/"
+    nome_arquivo = "04_vol_indices_rw_12M.csv"
+    df_vol.to_csv(load_path+nome_arquivo,index=False)
     
 def merge_returns_anual_benchmarks():
   #Get the Data
@@ -154,6 +178,9 @@ def merge_returns_anual_portfolios():
   nome_arquivo = "03_returns_portfolios_rw_12M.csv"
   final_df.to_csv(load_path+nome_arquivo,index=False)
   
+  
+  
+  
 def sharpe_analysis(df_merge,df_cdi): #Recebe df_imab com Vol
   
   #Define new columns to merge_data_new_df
@@ -177,3 +204,5 @@ def sharpe_analysis(df_merge,df_cdi): #Recebe df_imab com Vol
 # merge_vol_3M_portfolios()
 # merge_returns_anual_benchmarks()
 # merge_returns_anual_portfolios()
+calculate_vol_3M_indices()
+calculate_vol_12_indices()

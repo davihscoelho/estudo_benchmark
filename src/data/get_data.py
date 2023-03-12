@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 
 from src.data.get_bacen import consulta_bc
+#from get_bacen import consulta_bc
 # #Path Name File
 # path = r"wealth_study\data\raw\ANBIMA"
 # filenames = glob.glob(path + "\*.xls")
@@ -41,7 +42,8 @@ def get_daily_returns_indice_imab():
   nome_arquivo = "01_daily_returns_imab.csv"
   df = get_data(path)
   
-  df = df.iloc[:,[1,3]]  
+  df = df.iloc[:,[1,2]]
+  df.iloc[:,1]= np.log(df.iloc[:,1]/df.iloc[:,1].shift(1))
   df.columns = ["data","Variação_Diária_(%)"]
   df.to_csv(load_path+nome_arquivo,index=False)
   #print(df.head())
@@ -53,7 +55,8 @@ def get_daily_returns_indice_ihfa():
   nome_arquivo = "02_daily_returns_ihfa.csv"
   df = get_data(path)
   
-  df = df.iloc[:,[1,3]]
+  df = df.iloc[:,[1,2]]
+  df.iloc[:,1]= np.log(df.iloc[:,1]/df.iloc[:,1].shift(1))
   df.columns = ["data","Variação_Diária_(%)"]
   df.to_csv(load_path+nome_arquivo,index=False)
   #print(df.head())
@@ -64,7 +67,8 @@ def get_daily_returns_indice_imab5():
   nome_arquivo = "03_daily_returns_imab5.csv"
   df = get_data(path)
   
-  df = df.iloc[:,[1,3]]
+  df = df.iloc[:,[1,2]]
+  df.iloc[:,1]= np.log(df.iloc[:,1]/df.iloc[:,1].shift(1))
   df.columns = ["data","Variação_Diária_(%)"]
   df.to_csv(load_path+nome_arquivo,index=False)
 
