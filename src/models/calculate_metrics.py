@@ -2,7 +2,7 @@ import numpy as np
 
 def calculate_total_return(daily_returns):
   
-  cum_ret = daily_returns.cumsum().apply(np.exp)-1
+  cum_ret = daily_returns.cumsum().apply(np.exp)
   
   return cum_ret
 

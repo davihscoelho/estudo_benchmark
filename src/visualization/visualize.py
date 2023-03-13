@@ -32,8 +32,14 @@ def gerar_grafico_retorno_portfolio(benchmark,final_df,path_load):
                 ylabel="Retorno (%)",
                 title=f'Analise Retorno Anual {benchmark} e Port8',
                 ax=ax2)
+  ax0.yaxis.set_major_formatter(StrMethodFormatter('{x:.0%}'))
+  ax1.yaxis.set_major_formatter(StrMethodFormatter('{x:.0%}'))
+  ax2.yaxis.set_major_formatter(StrMethodFormatter('{x:.0%}'))
   plt.tight_layout();
   fig.savefig(path_load+f'Retorno_Port_{benchmark}.png')
+  
+
+
   
 
 def gerar_grafico_vol_portfolio(benchmark,final_df,path_load):
@@ -62,6 +68,10 @@ def gerar_grafico_vol_portfolio(benchmark,final_df,path_load):
                 ylabel="Volatilidade (%)",
                 title=f'Analise Volatilidade Anualizada {benchmark} e Port8',
                 ax=ax2)
+  
+  ax0.yaxis.set_major_formatter(StrMethodFormatter('{x:.0%}'))
+  ax1.yaxis.set_major_formatter(StrMethodFormatter('{x:.0%}'))
+  ax2.yaxis.set_major_formatter(StrMethodFormatter('{x:.0%}'))
   plt.tight_layout();
   fig.savefig(path_load+f'Volatilidade_Port_{benchmark}.png')
   
@@ -92,6 +102,9 @@ def gerar_grafico_retorno_portfolio_cdi(benchmark,final_df,path_load):
                 ylabel="Retorno (%) do CDI",
                 title=f'Analise Retorno Anual {benchmark} e Port8',
                 ax=ax2)
+  ax0.yaxis.set_major_formatter(StrMethodFormatter('{x:.0%}'))
+  ax1.yaxis.set_major_formatter(StrMethodFormatter('{x:.0%}'))
+  ax2.yaxis.set_major_formatter(StrMethodFormatter('{x:.0%}'))
   plt.tight_layout();
   fig.savefig(path_load+f'Retorno_Port_{benchmark}_CDI.png')
 

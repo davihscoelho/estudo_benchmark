@@ -33,6 +33,7 @@ def get_daily_returns_cdi():
   load_path = r"data/processed/"
   nome_arquivo = "08_daily_returns_cdi.csv"
   df_cdi.columns = ["Variação_Diária_(%)","data"]
+  df_cdi["Variação_Diária_(%)"] = df_cdi["Variação_Diária_(%)"]/100
   df_cdi.to_csv(load_path+nome_arquivo,index=False)
   
 def get_daily_returns_indice_imab():
@@ -47,6 +48,17 @@ def get_daily_returns_indice_imab():
   df.columns = ["data","Variação_Diária_(%)"]
   df.to_csv(load_path+nome_arquivo,index=False)
   #print(df.head())
+def get_daily_returns_indice_imag():
+  
+  path = "data/raw/ANBIMA/IMAGERAL-HISTORICO.xls"
+  load_path = r"data/processed/"
+  nome_arquivo = "01_daily_returns_imag.csv"
+  df = get_data(path)
+  
+  df = df.iloc[:,[1,2]]
+  df.iloc[:,1]= np.log(df.iloc[:,1]/df.iloc[:,1].shift(1))
+  df.columns = ["data","Variação_Diária_(%)"]
+  df.to_csv(load_path+nome_arquivo,index=False)
 
 def get_daily_returns_indice_ihfa():
   
@@ -101,7 +113,9 @@ def get_daily_returns_portfolios():
   w1 = np.array([51,5,15,23,2.5,2.5,1]) #Porfolio Perfil 1
   w2 = np.array([17.5,10,15,10,10,30,5]) #Portfolio Perfil 4
   w3 = np.array([0,0,0,0,30,50,20]) #Porfolio Perfil 8
-  
+  w1 = w1/100
+  w2 = w2/100
+  w3 = w3/100
   #Create a df for portfolio 1 daily returns
   df_p1= pd.DataFrame({
           "Variação_Diária_(%)":np.sum(w1*df_returns.iloc[:,0:7],axis=1),
@@ -127,9 +141,9 @@ def get_daily_returns_portfolios():
   #print(df_p1.head())
 
 ############################## EXECUTION ###############################
-get_daily_returns_indice_imab()
-get_daily_returns_indice_ihfa()
-get_daily_returns_indice_imab5()
-get_daily_returns_indices()
-get_daily_returns_portfolios()
-get_daily_returns_cdi()
+# get_daily_returns_indice_imab()
+# get_daily_returns_indice_ihfa()
+# get_daily_returns_indice_imab5()
+# get_daily_returns_indices()
+# get_daily_returns_portfolios()
+# get_daily_returns_cdi()

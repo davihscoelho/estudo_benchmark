@@ -119,7 +119,7 @@ def calculate_vol_3M_indices():
     #Get the Data
     df = pd.read_csv("data/processed/04_daily_returns_indices.csv")
     
-    df_vol = (((df.iloc[:,0:7]*100).rolling(window=66).std())*np.sqrt(252))
+    df_vol = (((df.iloc[:,0:7]).rolling(window=66).std())*np.sqrt(252))
     df_vol = df_vol.round(4)
     df_vol["data"] = df["data"]
     load_path = r"data/final/"
@@ -131,7 +131,7 @@ def calculate_vol_12_indices():
     #Get the Data
     df = pd.read_csv("data/processed/04_daily_returns_indices.csv")
     
-    df_vol = (((df.iloc[:,0:7]*100).rolling(window=252).std())*np.sqrt(252))
+    df_vol = (((df.iloc[:,0:7]).rolling(window=252).std())*np.sqrt(252))
     df_vol = df_vol.round(4)
     df_vol["data"] = df["data"]
     load_path = r"data/final/"
@@ -145,7 +145,6 @@ def merge_returns_anual_benchmarks():
   df3 = pd.read_csv("data/processed/12_anual_returns_imab5.csv")
   df4 = pd.read_csv("data/processed/14_anual_returns_cdi.csv")
   lista_dfs = [df1,df2,df3,df4]
-  
   
   #Merge All tada
   final_df = reduce(lambda left,right: pd.merge(left,right,on="data",how='inner'),lista_dfs).round(4).dropna()
@@ -178,9 +177,7 @@ def merge_returns_anual_portfolios():
   nome_arquivo = "03_returns_portfolios_rw_12M.csv"
   final_df.to_csv(load_path+nome_arquivo,index=False)
   
-  
-  
-  
+
 def sharpe_analysis(df_merge,df_cdi): #Recebe df_imab com Vol
   
   #Define new columns to merge_data_new_df
@@ -204,5 +201,5 @@ def sharpe_analysis(df_merge,df_cdi): #Recebe df_imab com Vol
 # merge_vol_3M_portfolios()
 # merge_returns_anual_benchmarks()
 # merge_returns_anual_portfolios()
-calculate_vol_3M_indices()
-calculate_vol_12_indices()
+# calculate_vol_3M_indices()
+# calculate_vol_12_indices()

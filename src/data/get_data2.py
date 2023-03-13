@@ -8,36 +8,67 @@ from src.data.get_data import get_data
 
 def get_anual_returns_indices_imab():
   
-  path = "data/raw/ANBIMA/IMAB-HISTORICO.xls"
+  path = "data/processed/01_daily_returns_imab.csv"
   load_path = r"data/processed/"
   nome_arquivo = "10_anual_returns_imab.csv"
-  df = get_data(path)
+  df = pd.read_csv(path)
   
-  df = df.loc[:,["Data de Referência","Variação 12 Meses (%)"]].round(4) 
-  df.columns= ["data","Variação_12_Meses_(%)"]
+  # df = df.loc[:,["Data de Referência","Variação 12 Meses (%)"]].round(4) 
+  # df.columns= ["data","Variação_12_Meses_(%)"]
+  
+  df["Variação_12_Meses_(%)"] = df["Variação_Diária_(%)"].rolling(window=252).sum()
+  df.drop(columns="Variação_Diária_(%)",inplace=True)
+  df["Variação_12_Meses_(%)"] = df["Variação_12_Meses_(%)"].round(4)
+  
+  df.to_csv(load_path+nome_arquivo,index=False)
+  
+def get_anual_returns_indices_imag():
+  
+  path = "data/processed/01_daily_returns_imag.csv"
+  load_path = r"data/processed/"
+  nome_arquivo = "10_anual_returns_imag.csv"
+  df = pd.read_csv(path)
+  
+  # df = df.loc[:,["Data de Referência","Variação 12 Meses (%)"]].round(4) 
+  # df.columns= ["data","Variação_12_Meses_(%)"]
+  
+  df["Variação_12_Meses_(%)"] = df["Variação_Diária_(%)"].rolling(window=252).sum()
+  df.drop(columns="Variação_Diária_(%)",inplace=True)
+  df["Variação_12_Meses_(%)"] = df["Variação_12_Meses_(%)"].round(4)
+  
   df.to_csv(load_path+nome_arquivo,index=False)
   
 def get_anual_returns_indices_ihfa():
   
-  path = "data/raw/ANBIMA/IHFA-HISTORICO.xls"
+  path = "data/processed/02_daily_returns_ihfa.csv"
   load_path = r"data/processed/"
   nome_arquivo = "11_anual_returns_ihfa.csv"
-  df = get_data(path)
+  df = pd.read_csv(path)
   
-  df = df.loc[:,["Data de Referência","Variação 12 Meses (%)"]].round(4)
-  df.columns= ["data","Variação_12_Meses_(%)"]
+  # df = df.loc[:,["Data de Referência","Variação 12 Meses (%)"]].round(4)
+  # df.columns= ["data","Variação_12_Meses_(%)"]
+  
+  df["Variação_12_Meses_(%)"] = df["Variação_Diária_(%)"].rolling(window=252).sum()
+  df.drop(columns="Variação_Diária_(%)",inplace=True)
+  df["Variação_12_Meses_(%)"] = df["Variação_12_Meses_(%)"].round(4)
+  
   df.to_csv(load_path+nome_arquivo,index=False)
 
 def get_anual_returns_indices_imab5():
   
   
-  path = "data/raw/ANBIMA/IMAB5-HISTORICO.xls"
+  path = "data/processed/03_daily_returns_imab5.csv"
   load_path = r"data/processed/"
   nome_arquivo = "12_anual_returns_imab5.csv"
-  df = get_data(path)
+  df = pd.read_csv(path)
   
-  df = df.loc[:,["Data de Referência","Variação 12 Meses (%)"]].round(4)
-  df.columns= ["data","Variação_12_Meses_(%)"]
+  # df = df.loc[:,["Data de Referência","Variação 12 Meses (%)"]].round(4)
+  # df.columns= ["data","Variação_12_Meses_(%)"]
+  
+  df["Variação_12_Meses_(%)"] = df["Variação_Diária_(%)"].rolling(window=252).sum()
+  df.drop(columns="Variação_Diária_(%)",inplace=True)
+  df["Variação_12_Meses_(%)"] = df["Variação_12_Meses_(%)"].round(4)
+  
   df.to_csv(load_path+nome_arquivo,index=False)
   
 def get_anual_returns_portfolios():
